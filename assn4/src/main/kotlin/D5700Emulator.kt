@@ -54,6 +54,7 @@ object D5700Emulator {
             cpuFuture?.get() // Blocks until finished/canceled
         } catch (_: Exception) {
             // If cancelled or interrupted
+            executor.shutdown()
         }
         println("Program halted. Emulator exiting.")
     }
