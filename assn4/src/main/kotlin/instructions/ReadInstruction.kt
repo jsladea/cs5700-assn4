@@ -8,6 +8,6 @@ class ReadInstruction : Instruction() {
         val address = cpu.getAddress()
         val value = cpu.readMemory(address)
         cpu.setReg(rX, value)
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

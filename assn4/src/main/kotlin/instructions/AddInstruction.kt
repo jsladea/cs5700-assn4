@@ -9,6 +9,6 @@ class AddInstruction : Instruction() {
         val rZ = op2.toInt() and 0xF
         val sum = (cpu.reg(rX) + cpu.reg(rY)).toByte()
         cpu.setReg(rZ, sum)
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

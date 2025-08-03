@@ -30,6 +30,7 @@ class CPU(
     fun executeCycle() {
         val op1 = fetchByte()
         val op2 = fetchByte()
+
         val instruction = InstructionFactory.decode(op1, op2)
         instruction.execute(this, op1, op2)
         // Tick timer at 60hz (every 8th cycle at 500hz)

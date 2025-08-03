@@ -11,6 +11,6 @@ class StoreInstruction : Instruction() {
         }
         val rX = (op1.toInt() and 0xF)
         cpu.setReg(rX, op2)
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

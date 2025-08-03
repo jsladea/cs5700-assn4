@@ -12,6 +12,6 @@ class WriteInstruction : Instruction() {
         } catch (e: Exception) {
             error("Write failed: ${e.message}")
         }
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

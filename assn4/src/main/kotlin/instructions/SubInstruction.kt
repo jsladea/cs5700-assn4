@@ -9,6 +9,6 @@ class SubInstruction : Instruction() {
         val rZ = op2.toInt() and 0xF
         val result = (cpu.reg(rX) - cpu.reg(rY)).toByte()
         cpu.setReg(rZ, result)
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

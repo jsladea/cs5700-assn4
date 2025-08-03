@@ -10,7 +10,7 @@ class DrawInstruction : Instruction() {
         val charByte = cpu.reg(rX)
         val charVal = charByte.toInt() and 0xFF
         if (charVal > 0x7F) error("DRAW: Value in r$rX is not a valid ASCII character (<= 0x7F): $charVal")
-        cpu.draw(charByte, cpu.reg(rY).toInt(), cpu.reg(rZ).toInt())
-        cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+        cpu.draw(charByte, rY, rZ) // <-- Use rY and rZ as row and column indices
+        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

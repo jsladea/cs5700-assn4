@@ -7,9 +7,7 @@ class SkipEqualInstruction : Instruction() {
         val rX = op1.toInt() and 0xF
         val rY = (op2.toInt() shr 4) and 0xF
         if (cpu.reg(rX) == cpu.reg(rY)) {
-            cpu.setProgramCounter(cpu.getProgramCounter() + 4) // skip next
-        } else {
-            cpu.setProgramCounter(cpu.getProgramCounter() + 2)
+            cpu.setProgramCounter(cpu.getProgramCounter() + 2) // skip next
         }
     }
 }
