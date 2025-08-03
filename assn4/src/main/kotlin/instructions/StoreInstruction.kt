@@ -1,5 +1,7 @@
 package org.example.instructions
 
+import org.example.system.CPU
+
 class StoreInstruction : Instruction() {
     override fun execute(cpu: CPU, op1: Byte, op2: Byte) {
         // 0000 = HALT

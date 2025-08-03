@@ -1,5 +1,7 @@
 package org.example.instructions
 
+import org.example.system.CPU
+
 object InstructionFactory {
     fun decode(op1: Byte, op2: Byte): Instruction {
         val n = (op1.toInt() shr 4) and 0xF
