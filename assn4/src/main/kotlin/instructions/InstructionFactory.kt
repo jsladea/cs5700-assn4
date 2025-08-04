@@ -22,7 +22,7 @@ object InstructionFactory {
             0xD -> ConvertToBase10Instruction()
             0xE -> ConvertByteToAsciiInstruction()
             0xF -> DrawInstruction()
-            else -> object : Instruction() { // Fallback
+            else -> object : Instruction() { // Fallback, but there currently are no possible other opcodes
                 override fun execute(cpu: CPU, op1: Byte, op2: Byte) {
                     error("Invalid instruction ${op1.toUByte().toString(16)} ${op2.toUByte().toString(16)}")
                 }

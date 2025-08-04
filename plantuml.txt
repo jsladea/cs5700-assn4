@@ -1,0 +1,147 @@
+@startuml
+skinparam classAttributeIconSize 0
+' Hardware Components
+class RAM {
+  - memory : ByteArray
+  + get(address : Int) : Byte
+  + set(address : Int, value : Byte)
+}
+class ROM {
+  - memory : ByteArray
+  + get(address : Int) : Byte
+  + set(address : Int, value : Byte)
+  + load(bytes : ByteArray)
+}
+class Display {
+  - frameBuffer : ByteArray
+  + draw(char : Byte, row : Int, col : Int)
+  + clear()
+  - render()
+}
+class Keyboard {
+  + readByte() : Byte
+}
+class Timer {
+  - t : Byte
+  + tick()
+  + reset()
+}
+class ProgramLoader {
+  + loadROMFile(path : String) : ByteArray
+}
+
+' Core System
+class CPU {
+  - r : Byte[8]
+  - p : Int
+  - a : Int
+  - m : Boolean
+  - haltedFlag : Boolean
+  - cycleCount : Int
+  - ram : RAM
+  - rom : ROM
+  - display : Display
+  - keyboard : Keyboard
+  - timer : Timer
+  + reset()
+  + executeCycle()
+  + reg(idx : Int) : Byte
+  + setReg(idx : Int, value : Byte)
+  + getProgramCounter() : Int
+  + setProgramCounter(value : Int)
+  + getAddress() : Int
+  + setAddress(value : Int)
+  + getMemoryFlag() : Boolean
+  + setMemoryFlag(flag : Boolean)
+  + getTimerValue() : Byte
+  + setTimerValue(value : Byte)
+  + readMemory(address : Int) : Byte
+  + writeMemory(address : Int, value : Byte)
+  + draw(char : Byte, row : Int, col : Int)
+  + readKeyboard() : Byte
+  + halt()
+}
+
+class D5700Emulator <<Singleton, Facade>> {
+  - ram : RAM
+  - rom : ROM
+  - display : Display
+  - keyboard : Keyboard
+  - timer : Timer
+  - cpu : CPU
+  - executor
+  - cpuFuture
+  + run()
+}
+
+class Main {
+  + main(args : Array<String>)
+}
+
+' Instruction Pattern
+abstract class Instruction {
+  + execute(cpu : CPU, op1 : Byte, op2 : Byte)
+}
+
+class InstructionFactory {
+  + decode(op1 : Byte, op2 : Byte) : Instruction
+}
+
+' Instruction Subclasses
+class StoreInstruction
+class AddInstruction
+class SubInstruction
+class ReadInstruction
+class WriteInstruction
+class JumpInstruction
+class ReadKeyboardInstruction
+class SwitchMemoryInstruction
+class SkipEqualInstruction
+class SkipNotEqualInstruction
+class SetAInstruction
+class SetTInstruction
+class ReadTInstruction
+class ConvertToBase10Instruction
+class ConvertByteToAsciiInstruction
+class DrawInstruction
+
+' Inheritance
+Instruction <|-- StoreInstruction
+Instruction <|-- AddInstruction
+Instruction <|-- SubInstruction
+Instruction <|-- ReadInstruction
+Instruction <|-- WriteInstruction
+Instruction <|-- JumpInstruction
+Instruction <|-- ReadKeyboardInstruction
+Instruction <|-- SwitchMemoryInstruction
+Instruction <|-- SkipEqualInstruction
+Instruction <|-- SkipNotEqualInstruction
+Instruction <|-- SetAInstruction
+Instruction <|-- SetTInstruction
+Instruction <|-- ReadTInstruction
+Instruction <|-- ConvertToBase10Instruction
+Instruction <|-- ConvertByteToAsciiInstruction
+Instruction <|-- DrawInstruction
+
+' Factory relationship
+InstructionFactory ..> Instruction : creates >
+
+' Relationships
+D5700Emulator o-- CPU
+D5700Emulator o-- RAM
+D5700Emulator o-- ROM
+D5700Emulator o-- Display
+D5700Emulator o-- Keyboard
+D5700Emulator o-- Timer
+D5700Emulator ..> ProgramLoader
+
+CPU o-- RAM
+CPU o-- ROM
+CPU o-- Display
+CPU o-- Keyboard
+CPU o-- Timer
+CPU ..> InstructionFactory
+
+Main ..> D5700Emulator
+
+@enduml
