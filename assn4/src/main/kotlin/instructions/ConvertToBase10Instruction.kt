@@ -13,6 +13,5 @@ class ConvertToBase10Instruction : Instruction() {
         cpu.writeMemory(addr, hundreds.toByte())
         cpu.writeMemory(addr + 1, tens.toByte())
         cpu.writeMemory(addr + 2, ones.toByte())
-        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

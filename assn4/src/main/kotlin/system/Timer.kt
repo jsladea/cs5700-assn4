@@ -2,8 +2,12 @@ package org.example.system
 
 class Timer {
     var t: Byte = 0
+
     fun tick() {
-        if (t > 0) t = (t - 1).toByte()
+
+        val unsignedValue = t.toInt() and 0xFF
+        if (unsignedValue > 0)
+            t = (unsignedValue - 1).toByte()
     }
     fun reset() { t = 0 }
 }

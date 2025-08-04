@@ -34,7 +34,6 @@ object D5700Emulator {
         val cpuRunnable = Runnable {
             if (!cpu.halted) {
                 cpu.executeCycle()
-                display.render()
             } else {
                 cpuFuture?.cancel(true)
                 executor.shutdown()

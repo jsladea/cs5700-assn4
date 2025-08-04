@@ -7,6 +7,5 @@ class ReadKeyboardInstruction : Instruction() {
         val rX = op1.toInt() and 0xF
         val value = cpu.readKeyboard()
         cpu.setReg(rX, value)
-        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }

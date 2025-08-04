@@ -15,6 +15,7 @@ class CPU(
     private var a: Int = 0 // Address register (16-bit)
     private var m: Boolean = false // Memory flag (false = RAM, true = ROM)
     private var haltedFlag = false
+    private var cycleCount: Int = 0
 
     val halted: Boolean get() = haltedFlag
 
@@ -25,6 +26,7 @@ class CPU(
         m = false
         haltedFlag = false
         timer.reset()
+        cycleCount = 0
     }
 
     fun executeCycle() {
@@ -34,7 +36,9 @@ class CPU(
         val instruction = InstructionFactory.decode(op1, op2)
         instruction.execute(this, op1, op2)
         // Tick timer at 60hz (every 8th cycle at 500hz)
-        if (p % 8 == 0) timer.tick()
+        cycleCount++
+        if (cycleCount % 8 == 0)
+            timer.tick()
     }
 
     private fun fetchByte(): Byte {

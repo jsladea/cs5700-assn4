@@ -11,6 +11,5 @@ class ConvertByteToAsciiInstruction : Instruction() {
         // Converts 0-F to ASCII '0'-'9', 'A'-'F'
         val ascii = if (value < 10) ('0'.code + value) else ('A'.code + value - 10)
         cpu.setReg(rY, ascii.toByte())
-        //cpu.setProgramCounter(cpu.getProgramCounter() + 2)
     }
 }
